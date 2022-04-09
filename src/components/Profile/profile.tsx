@@ -1,7 +1,7 @@
-import axios from "axios";
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { instanceAxios } from "../../services/axios";
 import Repos from "../Repos/repos";
 import Starred from "../Starred/starred";
 import { Card } from "./style";
@@ -17,9 +17,7 @@ const Profile: FunctionComponent = () => {
   const { login } = useParams();
 
   const { data, isFetching } = useQuery<User>("profile", async () => {
-    const { data } = await axios.get(`https://api.github.com/users/${login}`, {
-      params: { client_id: "920f6793d5ee86fd2741" },
-    });
+    const { data } = await instanceAxios.get(`/users/${login}`);
     return data;
   });
 

@@ -1,8 +1,8 @@
 import { FunctionComponent, useState } from "react";
 import { Button, Icon, TextField, Card } from "./style";
 import { useQuery } from "react-query";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { instanceAxios } from "../../services/axios";
 
 type Props = {};
 
@@ -17,11 +17,10 @@ type Users = {
 
 const List: FunctionComponent<Props> = () => {
   const { data, isFetching } = useQuery<Users[]>("users", async () => {
-    const { data } = await axios.get(" https://api.github.com/users", {
+    const { data } = await instanceAxios.get("/users", {
       params: {
         per_page: 30,
         since: 13788355,
-        client_id: "920f6793d5ee86fd2741",
       },
     });
     return data;

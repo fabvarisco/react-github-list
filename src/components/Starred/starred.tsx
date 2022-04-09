@@ -1,6 +1,6 @@
-import axios from "axios";
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
+import { instanceAxios } from "../../services/axios";
 
 type Props = {
     userId:string
@@ -13,7 +13,7 @@ type Starreds = {
 const Starred: FunctionComponent<any> = ({userId}) => {
 
   const { data, isFetching } = useQuery<Starreds[]>("starred", async () => {
-    const { data } = await axios.get(`https://api.github.com/users/${userId}/starred`, {params: {client_id: "920f6793d5ee86fd2741" }});
+    const { data } = await instanceAxios.get(`/users/${userId}/starred`);
     return data;
   });
 
