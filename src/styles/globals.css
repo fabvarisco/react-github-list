@@ -16,7 +16,7 @@ a {
   margin: 0 auto;
 }
 nav {
-  margin: 10px auto 80px;
+  margin: 10px auto 40px;
   padding: 10px 0;
   display: flex;
   justify-content: flex-end;
@@ -37,3 +37,4 @@ footer {
   color: #777;
   border-top: 1px solid #eaeaea;
 }
+

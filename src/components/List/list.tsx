@@ -1,62 +1,65 @@
 import { FunctionComponent, useState } from "react";
-import styles from "../../styles/List.module.css";
+import { Button, Icon, TextField, Card } from "./style";
+import { useQuery } from "react-query";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 type Props = {};
+
+type Users = {
+  html_url: string;
+  avatar_url: string;
+  login: string;
+  name: string;
+  bio: string;
+  id: number;
+};
+
 const List: FunctionComponent<Props> = () => {
+  const { data, isFetching } = useQuery<Users[]>("users", async () => {
+    const { data } = await axios.get(" https://api.github.com/users", {
+      params: {
+        per_page: 30,
+        since: 13788355,
+        client_id: "920f6793d5ee86fd2741",
+      },
+    });
+    return data;
+  });
   const [search, setSearch] = useState<string>("");
-  const [currentList, setCurrentList] = useState<Array<string>>([
-    "sdfsadas",
-    "gsdofkspodkfspd",
-    "Okdsfgpoksdfpok",
-  ]);
   return (
     <div>
-      <div>
-        <input
-          className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+      <div className="container flex mx-auto">
+        <TextField
           id="username"
           type="text"
-          placeholder="Github Username"
+          placeholder="Search Github Username"
           onChange={(e) => setSearch(e.target.value)}
         />
+        <button className="flex items-center justify-center px-4 border">
+          Search
+        </button>
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
-        {currentList
-          ?.filter((name: string) => {
-            if (search === "" && !name) return true;
-            return name?.includes(search);
-          })
-          .map((name: string, index: number) => (
-            <div key={index}>
-              <div className={styles.single}>
-                <img
-                  src="https://avatars.githubusercontent.com/u/2598101?s=120&v=4"
-                  style={{
-                    width: "60px",
-                    height: "60px",
-                    borderRadius: "50%",
-                    marginRight: 23,
-                  }}
-                />
-                <a>
-                  <h3>{name}</h3>
-                  <h4 style={{ color: "grey", fontWeight: "normal" }}>
-                    {name}
-                  </h4>
-                  <p>
-                    Programador desde 2015 com forte domino em HTML/CSS/JS,
-                    React e diversas frameworks como Material UI, Ionic,
-                    Bootstrap, angular, NextJS entre outras.
-                  </p>
-                </a>
-                <div>
-                  <button>repos</button>
-                  <button>starred</button>
+      <div className="">
+        {isFetching && <p>Loading...</p>}
+        {data?.map(({ avatar_url, login, html_url, id }: Users) => (
+          <div key={id}>
+            <Link to={`/${login}`}>
+              <Card>
+                <Icon src={avatar_url} />
+                <div >
+                  <h3>{login}</h3>
+                  <p className="mt-2">{html_url}</p>
                 </div>
-              </div>
-            </div>
-          ))}
+                <div className="self-center	">
+                  <Button>repos</Button>
+                  <Button>starred</Button>
+                </div>
+              </Card>
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );
