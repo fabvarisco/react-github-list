@@ -1,8 +1,8 @@
 import "./styles/globals.css";
-import Layout from "./components/Layout/layout";
-import List from "./components/List/list";
+import Layout from "./Layout/layout";
+import List from "./Pages/List/list";
 import { Route, Routes } from "react-router-dom";
-import Profile from "./components/Profile/profile";
+import Profile from "./Pages/Profile/profile";
 
 function App() {
   return (

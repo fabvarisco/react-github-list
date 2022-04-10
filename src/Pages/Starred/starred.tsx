@@ -1,6 +1,6 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
-import { instanceAxios } from "../../services/axios";
+import { instanceAxios } from "../../Services/axios";
 
 type Props = {
     userId:string

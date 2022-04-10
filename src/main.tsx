@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { queryClient } from "./services/queryClient";
+import { queryClient } from "./Services/queryClient";
 
 ReactDOM.render(
   <React.StrictMode>

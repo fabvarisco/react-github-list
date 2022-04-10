@@ -1,7 +1,7 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import { instanceAxios } from "../../services/axios";
+import { instanceAxios } from "../../Services/axios";
 import Repos from "../Repos/repos";
 import Starred from "../Starred/starred";
 import { Card } from "./style";

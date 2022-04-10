@@ -2,8 +2,8 @@ import {
   FunctionComponent,
   ReactNode,
 } from "react";
-import Footer from "../Footer/footer";
-import Navbar from "../Navbar/navbar";
+import Footer from "./Footer/footer";
+import Navbar from "./Navbar/navbar";
 
 type Props = {
   children: ReactNode;

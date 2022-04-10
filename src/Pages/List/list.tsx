@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from "react";
 import { Button, Icon, TextField, Card } from "./style";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { instanceAxios } from "../../services/axios";
+import { instanceAxios } from "../../Services/axios";
 
 type Props = {};
 
@@ -44,19 +44,25 @@ const List: FunctionComponent<Props> = () => {
         {isFetching && <p>Loading...</p>}
         {data?.map(({ avatar_url, login, html_url, id }: Users) => (
           <div key={id}>
-            <Link to={`/${login}`}>
-              <Card>
+            <Card className="grid grid-cols-4 gap-4">
+              <div className="col-end-1 col-span-1">
                 <Icon src={avatar_url} />
-                <div >
-                  <h3>{login}</h3>
-                  <p className="mt-2">{html_url}</p>
-                </div>
-                <div className="self-center	">
-                  <Button>repos</Button>
-                  <Button>starred</Button>
-                </div>
-              </Card>
-            </Link>
+              </div>
+              <div className="col-start-1 col-span-2">
+                <h3 className="mb-2">{login}</h3>
+                <a
+                  href={`https://github.com/${login}`}
+                  target="_blank"
+                  className="underline"
+                >
+                  {html_url}
+                </a>
+              </div >
+              <div className="self-center col-start-4 col-span-2">
+                <Button>repos</Button>
+                <Button>starred</Button>
+              </div>
+            </Card>
           </div>
         ))}
       </div>
