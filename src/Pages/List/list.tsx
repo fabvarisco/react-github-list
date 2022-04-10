@@ -1,8 +1,15 @@
 import { FunctionComponent, useState } from "react";
-import { Button, Icon, TextField, Card } from "./style";
+import {
+  Button,
+  Icon,
+  TextField,
+  Card,
+  SearchButton,
+  DotsButton,
+} from "./style";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
 import { instanceAxios } from "../../Services/axios";
+import { DotsHorizontalIcon } from "@heroicons/react/solid";
 
 type Props = {};
 
@@ -35,20 +42,20 @@ const List: FunctionComponent<Props> = () => {
           placeholder="Search Github Username"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button className="flex items-center justify-center px-4 border">
+        <SearchButton className="flex items-center justify-center px-4 border">
           Search
-        </button>
+        </SearchButton>
       </div>
 
       <div className="">
         {isFetching && <p>Loading...</p>}
         {data?.map(({ avatar_url, login, html_url, id }: Users) => (
           <div key={id}>
-            <Card className="grid grid-cols-4 gap-4">
-              <div className="col-end-1 col-span-1">
+            <Card className="flex flex-row">
+              <div className="flex-none">
                 <Icon src={avatar_url} />
               </div>
-              <div className="col-start-1 col-span-2">
+              <div className="grow">
                 <h3 className="mb-2">{login}</h3>
                 <a
                   href={`https://github.com/${login}`}
@@ -57,8 +64,8 @@ const List: FunctionComponent<Props> = () => {
                 >
                   {html_url}
                 </a>
-              </div >
-              <div className="self-center col-start-4 col-span-2">
+              </div>
+              <div className="flex-none  self-center hidden sm:block ">
                 <Button>repos</Button>
                 <Button>starred</Button>
               </div>

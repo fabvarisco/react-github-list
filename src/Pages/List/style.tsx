@@ -15,6 +15,15 @@ mx-4
 content-center
 `;
 
+export const SearchButton = tw.button`
+flex 
+items-center 
+justify-center 
+px-4 
+border
+mr-2
+`;
+
 export const TextField = tw.input`
 focus:ring-indigo-500 
 focus:border-indigo-500 
@@ -52,4 +61,9 @@ flex
 hover:border-l-8
 hover:border-indigo-600
 }
+`;
+
+export const DotsButton = tw.div`
+
+mt-4
 `
