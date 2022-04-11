@@ -2,9 +2,9 @@ import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { instanceAxios } from "../../Services/axios";
+import { Button, Card } from "../../Styles/StyledComponents/styledGlobal";
 import Repos from "../Repos/repos";
 import Starred from "../Starred/starred";
-import { Card } from "./style";
 
 type User = {
   login: string;
@@ -37,12 +37,13 @@ const Profile: FunctionComponent = () => {
               <p className="mt-4">{data?.bio}</p>
             </div>
             <div>
-              <button>repos</button>
-              <button>starred</button>
+              <a target={"_blank"} href={`https://github.com/${data?.login}`}>
+                <Button>Github</Button>
+              </a>
             </div>
           </Card>
-          <Repos userId={data?.login} />
-          <Starred userId={data?.login} />
+          <Repos userId={data?.login || ""} />
+          <Starred userId={data?.login || ""} />
         </Fragment>
       )}
     </Fragment>

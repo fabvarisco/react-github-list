@@ -1,6 +1,7 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { instanceAxios } from "../../Services/axios";
+import { CardCenter } from "../../Styles/StyledComponents/styledGlobal";
 
 type Props = {
   userId: string;
@@ -23,7 +24,7 @@ const Repos: FunctionComponent<Props> = ({ userId }) => {
     <Fragment>
       {!isFetching && (
         <Fragment>
-          <div className="card">
+          <CardCenter>
             <div className="flex flex-wrap justify-center space-x-2 items-end">
               {data?.map(({ name, id, language, html_url }: Repositories) => (
                 <span
@@ -50,7 +51,7 @@ const Repos: FunctionComponent<Props> = ({ userId }) => {
                 </span>
               ))}
             </div>
-          </div>
+          </CardCenter>
         </Fragment>
       )}
     </Fragment>

@@ -1,9 +1,7 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useRef, useState } from "react";
 import {
-  Button,
   Icon,
   TextField,
-  Card,
   SearchButton,
   SearchContainer,
   IconCol,
@@ -21,6 +19,8 @@ import { DotsIcon } from "../../Icons/iconList";
 import { Link } from "react-router-dom";
 import Modal from "../../Components/Modal/modal";
 import Repos from "../Repos/repos";
+import Starred from "../Starred/starred";
+import { Button, Card } from "../../Styles/StyledComponents/styledGlobal";
 type Props = {};
 
 type Users = {
@@ -35,9 +35,21 @@ type Users = {
 const List: FunctionComponent<Props> = () => {
   const [search, setSearch] = useState<string>("");
   const [users, setUsers] = useState<Users[]>([]);
-  const [userId, setUserId] = useState<string>("fabriciovo");
+  const [userId, setUserId] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [dropdown, setDropdown] = useState<boolean[]>([]);
+  const modalStarredRef = useRef<any>(null);
+  const modalReposRef = useRef<any>(null);
+
+  function handleOpenModalRepos(user: string) {
+    setUserId(user);
+    modalReposRef.current?.handleOpenModal();
+  }
+
+  function handleOpenModalStarred(user: string) {
+    setUserId(user);
+    modalStarredRef.current?.handleOpenModal();
+  }
 
   const fetchUsers = async () => {
     const { data } = await instanceAxios.get("/users", {
@@ -102,8 +114,12 @@ const List: FunctionComponent<Props> = () => {
                 </a>
               </InfoCol>
               <ButtonCol>
-                <Button>repos</Button>
-                <Button>starred</Button>
+                <Button onClick={() => handleOpenModalRepos(login)}>
+                  repos
+                </Button>
+                <Button onClick={() => handleOpenModalStarred(login)}>
+                  starred
+                </Button>
                 <Link to={`/${login}`}>
                   <Button>Details</Button>
                 </Link>
@@ -117,10 +133,18 @@ const List: FunctionComponent<Props> = () => {
                     <Dropdown id={`item_${id}`} className="">
                       <ul>
                         <li>
-                          <DropdownButton>Repos</DropdownButton>
+                          <DropdownButton
+                            onClick={() => handleOpenModalRepos(login)}
+                          >
+                            Repos
+                          </DropdownButton>
                         </li>
                         <li>
-                          <DropdownButton>Starred</DropdownButton>
+                          <DropdownButton
+                            onClick={() => handleOpenModalStarred(login)}
+                          >
+                            Starred
+                          </DropdownButton>
                         </li>
                         <li>
                           <Link to={`/${login}`}>
@@ -135,7 +159,10 @@ const List: FunctionComponent<Props> = () => {
             </Card>
           </div>
         ))}
-        <Modal>
+        <Modal ref={modalStarredRef} name={"Starred"}>
+          <Starred userId={userId} />
+        </Modal>
+        <Modal ref={modalReposRef} name={"Repos"}>
           <Repos userId={userId} />
         </Modal>
       </div>
