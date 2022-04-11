@@ -16,7 +16,6 @@ type Repositories = {
 const Repos: FunctionComponent<Props> = ({ userId }) => {
   const { data, isFetching } = useQuery<Repositories[]>("repos", async () => {
     const { data } = await instanceAxios.get(`/users/${userId}/repos`);
-    console.log(data);
     return data;
   });
 
@@ -33,8 +32,13 @@ const Repos: FunctionComponent<Props> = ({ userId }) => {
                 >
                   <img
                     className="rounded-full w-9 h-9 max-w-none"
-                    alt="A"
+                    alt={`${language?.toLowerCase()}`}
                     src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${language?.toLowerCase()}/${language?.toLowerCase()}-original.svg`}
+                  
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src = "./assets/svg/generic-icon.svg"
+                    }}
                   />
                   <a
                     href={html_url}
