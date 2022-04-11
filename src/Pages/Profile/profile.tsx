@@ -31,12 +31,12 @@ const Profile: FunctionComponent = () => {
               src={data?.avatar_url}
               className="w-16 h-16 rounded-full mr-6"
             />
-            <div>
+            <div className="grow">
               <h3>{data?.login}</h3>
               <h4 className="mt-1 text-gray-400">{data?.name}</h4>
               <p className="mt-4">{data?.bio}</p>
             </div>
-            <div>
+            <div >
               <a target={"_blank"} href={`https://github.com/${data?.login}`}>
                 <Button>Github</Button>
               </a>
