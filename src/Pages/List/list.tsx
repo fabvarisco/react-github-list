@@ -5,11 +5,20 @@ import {
   TextField,
   Card,
   SearchButton,
+  SearchContainer,
+  IconCol,
+  ButtonCol,
+  InfoCol,
+  LoginText,
+  DotsCol,
+  DropdownButton,
+  Dropdown,
   DotsButton,
 } from "./style";
 import { useQuery } from "react-query";
 import { instanceAxios } from "../../Services/axios";
 import { DotsIcon } from "../../Icons/iconList";
+import { Link } from "react-router-dom";
 type Props = {};
 
 type Users = {
@@ -37,28 +46,26 @@ const List: FunctionComponent<Props> = () => {
 
   return (
     <div>
-      <div className="container flex mx-auto">
+      <SearchContainer>
         <TextField
           id="username"
           type="text"
           placeholder="Search Github Username"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <SearchButton className="flex items-center justify-center px-4 border">
-          Search
-        </SearchButton>
-      </div>
+        <SearchButton>Search</SearchButton>
+      </SearchContainer>
 
       <div className="">
         {isFetching && <p>Loading...</p>}
         {data?.map(({ avatar_url, login, html_url, id }: Users) => (
           <div key={id}>
-            <Card className="flex flex-row">
-              <div className="flex-none">
+            <Card>
+              <IconCol>
                 <Icon src={avatar_url} />
-              </div>
-              <div className="grow">
-                <h3 className="mb-2">{login}</h3>
+              </IconCol>
+              <InfoCol>
+                <LoginText>{login}</LoginText>
                 <a
                   href={`https://github.com/${login}`}
                   target="_blank"
@@ -66,38 +73,41 @@ const List: FunctionComponent<Props> = () => {
                 >
                   {html_url}
                 </a>
-              </div>
-              <div className="flex-none  self-center hidden sm:block ">
+              </InfoCol>
+              <ButtonCol>
                 <Button>repos</Button>
                 <Button>starred</Button>
-              </div>
-              <div className="flex-none self-center sm:hidden ">
-                <div
-                  className="activeButton -mt-10 -ml-8 absolute"
-                  id={`button_${id}`}
-                >
+                <Link to={`/${login}`}>
+                  <Button>Details</Button>
+                </Link>
+              </ButtonCol>
+              <DotsCol>
+                <DotsButton id={`button_${id}`}>
                   <button onClick={() => setDropdown(dropdown)}>
                     <DotsIcon />
                   </button>
                   {dropdown && (
-                    <div
+                    <Dropdown
                       id={`item_${id}`}
-                      className="item absolute -ml-12 border bg-white rounded-lg p-2"
+                      className=""
                     >
                       <ul>
                         <li>
-                          <button className="block px-4 py-2 text-gray-800 hover:bg-indigo-500">
-                            Repos
-                          </button>
+                          <DropdownButton>Repos</DropdownButton>
                         </li>
                         <li>
-                          <button className="block px-4 py-2 text-gray-800 hover:bg-indigo-500">Starred</button>
+                          <DropdownButton>Starred</DropdownButton>
+                        </li>
+                        <li>
+                          <Link to={`/${login}`}>
+                            <DropdownButton>Details</DropdownButton>
+                          </Link>
                         </li>
                       </ul>
-                    </div>
+                    </Dropdown>
                   )}
-                </div>
-              </div>
+                </DotsButton>
+              </DotsCol>
             </Card>
           </div>
         ))}

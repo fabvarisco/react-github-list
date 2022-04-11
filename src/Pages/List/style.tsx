@@ -49,6 +49,8 @@ text-gray-400
 `;
 
 export const Card = tw.div`
+flex 
+flex-row
 p-5
 bg-white
 block
@@ -63,7 +65,50 @@ hover:border-indigo-600
 }
 `;
 
-export const DotsButton = tw.div`
+export const SearchContainer = tw.div`
+container
+flex
+mx-auto`;
 
-mt-4
-`
+export const IconCol = tw.div`
+flex-none`;
+export const InfoCol = tw.div`
+grow`;
+
+export const ButtonCol = tw.div`
+flex-none  self-center hidden sm:block`;
+
+export const LoginText = tw.h3`
+mb-2`;
+
+export const DotsCol = tw.div`
+flex-none 
+self-center
+sm:hidden
+`;
+
+export const DotsButton = tw.div`
+absolute
+activeButton
+-mt-10 
+-ml-8 
+`;
+
+export const DropdownButton = tw.div`
+block 
+px-4 
+py-2 
+text-gray-800 
+hover:bg-indigo-500
+cursor-pointer
+`;
+
+export const Dropdown = tw.div`
+item
+absolute
+z-50
+-ml-12
+border
+bg-white
+rounded-lg p-2
+`;

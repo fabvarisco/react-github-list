@@ -1,6 +1,5 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
 import { instanceAxios } from "../../Services/axios";
 
 type Props = {
