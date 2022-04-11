@@ -19,6 +19,8 @@ import { useQuery } from "react-query";
 import { instanceAxios } from "../../Services/axios";
 import { DotsIcon } from "../../Icons/iconList";
 import { Link } from "react-router-dom";
+import Modal from "../../Components/Modal/modal";
+import Repos from "../Repos/repos";
 type Props = {};
 
 type Users = {
@@ -33,25 +35,26 @@ type Users = {
 const List: FunctionComponent<Props> = () => {
   const [search, setSearch] = useState<string>("");
   const [users, setUsers] = useState<Users[]>([]);
+  const [userId, setUserId] = useState<string>("fabriciovo");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [dropdown, setDropdown] = useState<boolean[]>([]);
 
-  const { data, isFetching, isError, error } = useQuery<Users[]>(
-    "users",
-    async () => {
-      const { data } = await instanceAxios.get("/users", {
-        params: {
-          per_page: 30,
-          since: 13788355,
-        },
-      });
+  const fetchUsers = async () => {
+    const { data } = await instanceAxios.get("/users", {
+      params: {
+        per_page: 30,
+        since: 13788355,
+      },
+    });
+    return data;
+  };
+
+  const { isFetching } = useQuery<Users[]>("users", fetchUsers, {
+    refetchOnWindowFocus: false,
+    onSuccess: (data) => {
       setUsers(data);
-      return data;
     },
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  });
 
   const searchUser = () => {
     instanceAxios
@@ -132,6 +135,9 @@ const List: FunctionComponent<Props> = () => {
             </Card>
           </div>
         ))}
+        <Modal>
+          <Repos userId={userId} />
+        </Modal>
       </div>
     </div>
   );
