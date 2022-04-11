@@ -11,7 +11,7 @@ import { useQuery } from "react-query";
 import { instanceAxios } from "../../Services/axios";
 import { DotsIcon } from "../../Icons/iconList";
 type Props = {};
-import "../../Styles/globals.css";
+
 type Users = {
   html_url: string;
   avatar_url: string;
@@ -82,14 +82,16 @@ const List: FunctionComponent<Props> = () => {
                   {dropdown && (
                     <div
                       id={`item_${id}`}
-                      className="item absolute -ml-8 border"
+                      className="item absolute -ml-12 border bg-white rounded-lg p-2"
                     >
                       <ul>
                         <li>
-                          <button>Repos</button>
+                          <button className="block px-4 py-2 text-gray-800 hover:bg-indigo-500">
+                            Repos
+                          </button>
                         </li>
                         <li>
-                          <button>Starred</button>
+                          <button className="block px-4 py-2 text-gray-800 hover:bg-indigo-500">Starred</button>
                         </li>
                       </ul>
                     </div>
