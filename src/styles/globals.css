@@ -38,3 +38,10 @@ footer {
   border-top: 1px solid #eaeaea;
 }
 
+.item[id^="item_"] {
+  display: none;
+}
+.activeButton:hover[id^="button_"] > .item[id^="item_"] {
+  color: red;
+  display: block;
+}

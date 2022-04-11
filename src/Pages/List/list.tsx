@@ -9,10 +9,9 @@ import {
 } from "./style";
 import { useQuery } from "react-query";
 import { instanceAxios } from "../../Services/axios";
-import { DotsHorizontalIcon } from "@heroicons/react/solid";
-
+import { DotsIcon } from "../../Icons/iconList";
 type Props = {};
-
+import "../../Styles/globals.css";
 type Users = {
   html_url: string;
   avatar_url: string;
@@ -23,6 +22,9 @@ type Users = {
 };
 
 const List: FunctionComponent<Props> = () => {
+  const [search, setSearch] = useState<string>("");
+  const [dropdown, setDropdown] = useState<boolean[]>([]);
+
   const { data, isFetching } = useQuery<Users[]>("users", async () => {
     const { data } = await instanceAxios.get("/users", {
       params: {
@@ -32,7 +34,7 @@ const List: FunctionComponent<Props> = () => {
     });
     return data;
   });
-  const [search, setSearch] = useState<string>("");
+
   return (
     <div>
       <div className="container flex mx-auto">
@@ -68,6 +70,31 @@ const List: FunctionComponent<Props> = () => {
               <div className="flex-none  self-center hidden sm:block ">
                 <Button>repos</Button>
                 <Button>starred</Button>
+              </div>
+              <div className="flex-none self-center sm:hidden ">
+                <div
+                  className="activeButton -mt-10 -ml-8 absolute"
+                  id={`button_${id}`}
+                >
+                  <button onClick={() => setDropdown(dropdown)}>
+                    <DotsIcon />
+                  </button>
+                  {dropdown && (
+                    <div
+                      id={`item_${id}`}
+                      className="item absolute -ml-8 border"
+                    >
+                      <ul>
+                        <li>
+                          <button>Repos</button>
+                        </li>
+                        <li>
+                          <button>Starred</button>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
               </div>
             </Card>
           </div>
