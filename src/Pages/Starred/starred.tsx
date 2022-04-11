@@ -13,7 +13,7 @@ type Starreds = {
   html_url: string;
 };
 
-const Starred: FunctionComponent<any> = ({ userId }) => {
+const Starred: FunctionComponent<Props> = ({ userId }) => {
   const { data, isFetching } = useQuery<Starreds[]>("starred", async () => {
     const { data } = await instanceAxios.get(`/users/${userId}/starred`);
     return data;
@@ -33,14 +33,10 @@ const Starred: FunctionComponent<any> = ({ userId }) => {
                   <img
                     className="rounded-full w-9 h-9 max-w-none"
                     alt={`${language?.toLowerCase()}`}
-                    src={
-                      language
-                        ? `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${language?.toLowerCase()}/${language?.toLowerCase()}-original.svg`
-                        : "https://img.icons8.com/cotton/64/000000/code.png"
-                    }
+                    src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${language?.toLowerCase()}/${language?.toLowerCase()}-original.svg`}
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null;
-                      currentTarget.src = "../../Icons/svg/generic-icon.svg"
+                      currentTarget.src = "/svg/generic-icon.svg"
                     }}
                   />
                   <span className="flex items-center px-3 py-2">{name}</span>

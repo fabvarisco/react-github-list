@@ -32,17 +32,40 @@ type Users = {
 
 const List: FunctionComponent<Props> = () => {
   const [search, setSearch] = useState<string>("");
+  const [users, setUsers] = useState<Users[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [dropdown, setDropdown] = useState<boolean[]>([]);
 
-  const { data, isFetching } = useQuery<Users[]>("users", async () => {
-    const { data } = await instanceAxios.get("/users", {
-      params: {
-        per_page: 30,
-        since: 13788355,
-      },
-    });
-    return data;
-  });
+  const { data, isFetching, isError, error } = useQuery<Users[]>(
+    "users",
+    async () => {
+      const { data } = await instanceAxios.get("/users", {
+        params: {
+          per_page: 30,
+          since: 13788355,
+        },
+      });
+      setUsers(data);
+      return data;
+    },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const searchUser = () => {
+    instanceAxios
+      .get(`/users/${search}`)
+      .then(({ data }) => {
+        setErrorMessage("");
+        setUsers([data]);
+      })
+      .catch((error) => {
+        error.response.status === 404
+          ? setErrorMessage("User Not Found!")
+          : setErrorMessage(error.message);
+      });
+  };
 
   return (
     <div>
@@ -53,12 +76,13 @@ const List: FunctionComponent<Props> = () => {
           placeholder="Search Github Username"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <SearchButton>Search</SearchButton>
+        <SearchButton onClick={() => searchUser()}>Search</SearchButton>
       </SearchContainer>
 
       <div className="">
         {isFetching && <p>Loading...</p>}
-        {data?.map(({ avatar_url, login, html_url, id }: Users) => (
+        {errorMessage !== "" && <p>{errorMessage}</p>}
+        {users?.map(({ avatar_url, login, html_url, id }: Users) => (
           <div key={id}>
             <Card>
               <IconCol>
@@ -87,10 +111,7 @@ const List: FunctionComponent<Props> = () => {
                     <DotsIcon />
                   </button>
                   {dropdown && (
-                    <Dropdown
-                      id={`item_${id}`}
-                      className=""
-                    >
+                    <Dropdown id={`item_${id}`} className="">
                       <ul>
                         <li>
                           <DropdownButton>Repos</DropdownButton>

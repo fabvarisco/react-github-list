@@ -37,7 +37,7 @@ const Repos: FunctionComponent<Props> = ({ userId }) => {
                   
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null;
-                      currentTarget.src = "./assets/svg/generic-icon.svg"
+                      currentTarget.src = "/svg/generic-icon.svg"
                     }}
                   />
                   <a
