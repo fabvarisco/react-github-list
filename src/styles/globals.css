@@ -42,6 +42,6 @@ footer {
   display: none;
 }
 .activeButton:hover[id^="button_"] > .item[id^="item_"] {
-  color: red;
   display: block;
 }
+
