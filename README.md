@@ -4,9 +4,9 @@
 
 
 ## Features
-* Search for github users
-* See their repos
-* See their starred repos
+* Search for github user's
+* See user's repos
+* See user's starred repos
 
 ## Built With
 * React
