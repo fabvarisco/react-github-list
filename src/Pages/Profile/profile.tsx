@@ -1,10 +1,11 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { instanceAxios } from "../../Services/axios";
-import { Button, Card } from "../../Styles/StyledComponents/styledGlobal";
+import { Button, Card, ProfileImg } from "../../Styles/StyledComponents/styledGlobal";
 import Repos from "../Repos/repos";
 import Starred from "../Starred/starred";
+import { TitleText } from "./style";
 
 type User = {
   login: string;
@@ -27,25 +28,29 @@ const Profile: FunctionComponent = () => {
       {!isFetching && (
         <Fragment>
           <Card>
-            <img
+            <ProfileImg
               src={data?.avatar_url}
-              className="w-16 h-16 rounded-full mr-6"
             />
             <div className="grow">
               <h3>{data?.login}</h3>
               <h4 className="mt-1 text-gray-400">{data?.name}</h4>
               <p className="mt-4">{data?.bio}</p>
             </div>
-            <div >
+            <div>
               <a target={"_blank"} href={`https://github.com/${data?.login}`}>
                 <Button>Github</Button>
               </a>
             </div>
           </Card>
+          <TitleText>Repositories</TitleText>
           <Repos userId={data?.login || ""} />
+          <TitleText>Starred</TitleText>
           <Starred userId={data?.login || ""} />
         </Fragment>
       )}
+      <Link to={'/'} className="flex flex-col m-4">
+        <Button>Back</Button>
+      </Link>
     </Fragment>
   );
 };

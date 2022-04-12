@@ -1,9 +1,9 @@
 import axios from "axios";
 
+export const API_DEFAULT_PARAMS = {
+  client_id: import.meta.env.VITE_CLIENT_ID,
+};
 export const instanceAxios = axios.create({
-    baseURL: import.meta.env.APP_URL || "https://api.github.com",
-    timeout: 1000,
-    params:{
-        client_id:import.meta.env.CLIENT_ID
-    }
-})
+  baseURL: import.meta.env.VITE_APP_URL,
+  timeout: 1000,
+});

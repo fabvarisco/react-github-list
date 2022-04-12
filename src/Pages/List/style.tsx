@@ -24,13 +24,6 @@ w-full
 border-none
 `;
 
-export const Icon = tw.img`
-w-16
-h-16
-rounded-full
-mr-6
-`;
-
 export const TextName = tw.h4`
 text-gray-400
 `;
@@ -82,4 +75,10 @@ z-50
 border
 bg-white
 rounded-lg p-2
+`;
+
+export const Pagination = tw.div`
+flex
+justify-center
+m-8
 `;
