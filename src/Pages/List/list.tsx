@@ -59,7 +59,7 @@ const List: FunctionComponent<Props> = () => {
   };
 
   const fetchUsers = async () => {
-    const { data } = await instanceAxios.get("/users", {
+    const { data } = await instanceAxios.get("users", {
       params: {
         ...API_DEFAULT_PARAMS,
         per_page: 30,
@@ -94,7 +94,7 @@ const List: FunctionComponent<Props> = () => {
 
   const searchUser = () => {
     instanceAxios
-      .get(`/users/${search}`)
+      .get(`users/${search}`)
       .then(({ data }) => {
         setErrorMessage("");
         setUsers([data]);

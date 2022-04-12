@@ -1,6 +1,6 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
-import { instanceAxios } from "../../Services/axios";
+import { API_DEFAULT_PARAMS, instanceAxios } from "../../Services/axios";
 import {
   LanguageIcon,
   Tag,
@@ -22,7 +22,9 @@ type Starreds = {
 
 const Starred: FunctionComponent<Props> = ({ userId }) => {
   const { data, isFetching } = useQuery<Starreds[]>("starred", async () => {
-    const { data } = await instanceAxios.get(`/users/${userId}/starred`);
+    const { data } = await instanceAxios.get(`users/${userId}/starred`, {
+      params: { ...API_DEFAULT_PARAMS },
+    });
     return data;
   });
 

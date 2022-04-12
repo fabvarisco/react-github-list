@@ -22,7 +22,7 @@ type Repositories = {
 
 const Repos: FunctionComponent<Props> = ({ userId }) => {
   const { data, isFetching } = useQuery<Repositories[]>("repos", async () => {
-    const { data } = await instanceAxios.get(`/users/${userId}/repos`, {
+    const { data } = await instanceAxios.get(`users/${userId}/repos`, {
       params: { ...API_DEFAULT_PARAMS },
     });
     return data;

@@ -1,8 +1,12 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
-import { instanceAxios } from "../../Services/axios";
-import { Button, Card, ProfileImg } from "../../Styles/StyledComponents/styledGlobal";
+import { API_DEFAULT_PARAMS, instanceAxios } from "../../Services/axios";
+import {
+  Button,
+  Card,
+  ProfileImg,
+} from "../../Styles/StyledComponents/styledGlobal";
 import Repos from "../Repos/repos";
 import Starred from "../Starred/starred";
 import { TitleText } from "./style";
@@ -18,7 +22,9 @@ const Profile: FunctionComponent = () => {
   const { login } = useParams();
 
   const { data, isFetching } = useQuery<User>("profile", async () => {
-    const { data } = await instanceAxios.get(`/users/${login}`);
+    const { data } = await instanceAxios.get(`users/${login}`, {
+      params: { ...API_DEFAULT_PARAMS },
+    });
     return data;
   });
 
@@ -28,9 +34,7 @@ const Profile: FunctionComponent = () => {
       {!isFetching && (
         <Fragment>
           <Card>
-            <ProfileImg
-              src={data?.avatar_url}
-            />
+            <ProfileImg src={data?.avatar_url} />
             <div className="grow">
               <h3>{data?.login}</h3>
               <h4 className="mt-1 text-gray-400">{data?.name}</h4>
@@ -48,7 +52,7 @@ const Profile: FunctionComponent = () => {
           <Starred userId={data?.login || ""} />
         </Fragment>
       )}
-      <Link to={'/'} className="flex flex-col m-4">
+      <Link to={"/"} className="flex flex-col m-4">
         <Button>Back</Button>
       </Link>
     </Fragment>
