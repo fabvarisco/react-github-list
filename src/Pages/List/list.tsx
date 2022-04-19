@@ -95,7 +95,7 @@ const List: FunctionComponent<Props> = () => {
   const searchUser = () => {
     instanceAxios
       .get(`users/${search}`)
-      .then(({ data }): Users => {
+      .then(({ data }) => {
         setErrorMessage("");
         setUsers([data]);
       })
