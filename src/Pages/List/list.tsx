@@ -11,7 +11,7 @@ import {
   DropdownButton,
   Dropdown,
   DotsButton,
-  Pagination
+  Pagination,
 } from "./style";
 import { useQuery } from "react-query";
 import { API_DEFAULT_PARAMS, instanceAxios } from "../../Services/axios";
@@ -95,11 +95,11 @@ const List: FunctionComponent<Props> = () => {
   const searchUser = () => {
     instanceAxios
       .get(`users/${search}`)
-      .then(({ data }) => {
+      .then(({ data }): Users => {
         setErrorMessage("");
         setUsers([data]);
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         error.response.status === 404
           ? setErrorMessage("User Not Found!")
           : setErrorMessage(error.message);
