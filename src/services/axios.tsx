@@ -6,7 +6,4 @@ export const API_DEFAULT_PARAMS = {
 export const instanceAxios = axios.create({
   baseURL: import.meta.env.VITE_APP_URL,
   timeout: 1000,
-  headers: {
-    Authorization: "token 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",
-  },
 });
