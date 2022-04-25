@@ -25,7 +25,7 @@ import {
   Card,
   ProfileImg,
 } from "../../Styles/StyledComponents/styledGlobal";
-type Props = {};
+
 
 type Users = {
   html_url: string;
@@ -36,7 +36,7 @@ type Users = {
   id: number;
 };
 
-const List: FunctionComponent<Props> = () => {
+const List: FunctionComponent = () => {
   const [search, setSearch] = useState<string>("");
   const [users, setUsers] = useState<Users[]>([]);
   const [userId, setUserId] = useState<string>("");
@@ -98,9 +98,8 @@ const List: FunctionComponent<Props> = () => {
       .then(({ data }) => {
         setErrorMessage("");
         setUsers([data]);
-      }) 
-      .catch((error: Error) => (setErrorMessage("User Not Found!"))
-      };
+      })
+      .catch((error: Error) => setErrorMessage(error.message));
   };
 
   return (
