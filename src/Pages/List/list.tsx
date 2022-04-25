@@ -98,12 +98,9 @@ const List: FunctionComponent<Props> = () => {
       .then(({ data }) => {
         setErrorMessage("");
         setUsers([data]);
-      })
-      .catch((error: Error) => {
-        error.response.status === 404
-          ? setErrorMessage("User Not Found!")
-          : setErrorMessage(error.message);
-      });
+      }) 
+      .catch((error: Error) => (setErrorMessage("User Not Found!"))
+      };
   };
 
   return (
