@@ -1,17 +1,17 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
-import { API_DEFAULT_PARAMS, instanceAxios } from "../../Services/axios";
+import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/axios";
 import {
   Button,
   Card,
   ProfileImg,
-} from "../../Styles/StyledComponents/styledGlobal";
-import Repos from "../Repos/repos";
-import Starred from "../Starred/starred";
+} from "../../styles/StyledComponents/styledGlobal";
+import Repos from "../Repos";
+import Starred from "../Starred";
 import { TitleText } from "./style";
 
-type User = {
+interface User {
   login: string;
   name: string;
   bio: string;

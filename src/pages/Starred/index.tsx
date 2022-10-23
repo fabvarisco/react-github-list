@@ -1,19 +1,19 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
-import { API_DEFAULT_PARAMS, instanceAxios } from "../../Services/axios";
+import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/axios";
 import {
   LanguageIcon,
   Tag,
   TagContainer,
   UnderlineLink,
   CardCenter,
-} from "../../Styles/StyledComponents/styledGlobal";
+} from "../../styles/StyledComponents/styledGlobal";
 
-type Props = {
+interface Props {
   userId: string;
 };
 
-type Starreds = {
+interface Starreds {
   name: string;
   id: string;
   language: string;

@@ -14,20 +14,20 @@ import {
   Pagination,
 } from "./style";
 import { useQuery } from "react-query";
-import { API_DEFAULT_PARAMS, instanceAxios } from "../../Services/axios";
-import { DotsIcon } from "../../Icons/iconList";
+import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/axios";
+import { DotsIcon } from "../../icons/iconList";
 import { Link } from "react-router-dom";
-import Modal from "../../Components/Modal/modal";
-import Repos from "../Repos/repos";
-import Starred from "../Starred/starred";
+import Modal from "../../components/Modal/modal";
+import Repos from "../Repos";
+import Starred from "../Starred";
 import {
   Button,
   Card,
   ProfileImg,
-} from "../../Styles/StyledComponents/styledGlobal";
+} from "../../styles/StyledComponents/styledGlobal";
 
 
-type Users = {
+interface Users {
   html_url: string;
   avatar_url: string;
   login: string;

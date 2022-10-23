@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-type Ref = {
+interface Ref {
   handleOpenModal: () => void;
 };
 
