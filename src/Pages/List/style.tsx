@@ -1,4 +1,5 @@
 import tw from "tailwind-styled-components";
+import { IsTwElement, TailwindComponent } from "tailwind-styled-components/dist/tailwind";
 
 
 

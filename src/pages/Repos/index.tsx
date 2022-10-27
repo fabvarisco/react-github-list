@@ -9,11 +9,12 @@ import {
   UnderlineLink,
 } from "../../styles/StyledComponents/styledGlobal";
 import { API_DEFAULT_PARAMS } from "../../services/axios";
-type Props = {
+
+interface Props {
   userId: string;
 };
 
-type Repositories = {
+interface Repositories {
   name: string;
   id: string;
   language: string;
@@ -30,7 +31,7 @@ const Repos: FunctionComponent<Props> = ({ userId }) => {
 
   return (
     <Fragment>
-      {!isFetching && (
+      {!isFetching  ? (
         <Fragment>
           <CardCenter>
             <TagContainer>
@@ -63,7 +64,7 @@ const Repos: FunctionComponent<Props> = ({ userId }) => {
             </TagContainer>
           </CardCenter>
         </Fragment>
-      )}
+      ) : null}
     </Fragment>
   );
 };

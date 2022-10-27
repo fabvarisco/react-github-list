@@ -1,4 +1,16 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { useQuery } from "react-query";
+import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/axios";
+import { DotsIcon } from "../../icons/iconList";
+import { Link } from "react-router-dom";
+import Modal from "../../components/Modal";
+import Repos from "../Repos";
+import Starred from "../Starred";
+import {
+  Button,
+  Card,
+  ProfileImg,
+} from "../../styles/StyledComponents/styledGlobal";
 import {
   TextField,
   SearchButton,
@@ -13,19 +25,6 @@ import {
   DotsButton,
   Pagination,
 } from "./style";
-import { useQuery } from "react-query";
-import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/axios";
-import { DotsIcon } from "../../icons/iconList";
-import { Link } from "react-router-dom";
-import Modal from "../../components/Modal/modal";
-import Repos from "../Repos";
-import Starred from "../Starred";
-import {
-  Button,
-  Card,
-  ProfileImg,
-} from "../../styles/StyledComponents/styledGlobal";
-
 
 interface Users {
   html_url: string;
@@ -104,7 +103,7 @@ const List: FunctionComponent = () => {
 
   return (
     <div>
-      <SearchContainer>
+      <div className="container flex mx-auto">
         <TextField
           id="username"
           type="text"
@@ -112,8 +111,8 @@ const List: FunctionComponent = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
         <SearchButton onClick={() => searchUser()}>Search</SearchButton>
-      </SearchContainer>
-      <Pagination>
+      </div>
+      <div className="flex justify-center m-8">
         <Button onClick={() => back()}>Back</Button>
         <input
           value={pageId}
@@ -124,7 +123,7 @@ const List: FunctionComponent = () => {
           }}
         />
         <Button onClick={() => next()}>Next</Button>
-      </Pagination>
+      </div>
       <div className="">
         {isFetching && <p>Loading...</p>}
         {errorMessage !== "" && <p>{errorMessage}</p>}

@@ -11,7 +11,7 @@ interface Ref {
   handleOpenModal: () => void;
 };
 
-type Props = {
+interface Props {
   children: ReactNode;
   name: string;
 };
