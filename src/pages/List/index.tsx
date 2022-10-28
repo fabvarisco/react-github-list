@@ -105,6 +105,7 @@ const List: FunctionComponent = () => {
       {errorMessage !== "" ? <p>{errorMessage}</p> : null}
       {!isFetching ?
         <Fragment>
+          {/*TODO - Create Card component*/}
           {users?.map(({ avatar_url, login, html_url, id }: IUsers) => (
             <div className={globals.Card} key={id}>
               <div className={style.IconCol}>
@@ -131,6 +132,8 @@ const List: FunctionComponent = () => {
                   <button className={globals.Button} >Details</button>
                 </Link>
               </div>
+
+              {/*TODO - Create dots component*/}
               <div className={style.DotsCol}>
                 <div className={style.DotsButton} id={`button_${id}`}>
                   <button onClick={() => setDropdown(dropdown)}>

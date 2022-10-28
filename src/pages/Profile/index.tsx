@@ -24,6 +24,7 @@ const Profile: FunctionComponent = () => {
     <section>
       {!isFetching ? (
         <Fragment>
+          {/*TODO - Create Profile Card component*/}
           <div className={globals.Card}>
             <img className={globals.ProfileImg} src={data?.avatar_url} />
             <div className="grow">
