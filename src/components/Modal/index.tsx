@@ -61,4 +61,5 @@ const Modal: ForwardRefRenderFunction<Ref, Props> = (
     ) : null
   );
 };
+
 export default forwardRef(Modal);
