@@ -1,11 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from "./App";
+
 import { QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import { queryClient } from "./services/queryClient";
+import { queryClient } from "./services/QueryClient";
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
@@ -13,5 +14,4 @@ ReactDOM.render(
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById("root")
 );

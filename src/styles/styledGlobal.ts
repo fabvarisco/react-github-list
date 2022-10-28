@@ -1,6 +1,4 @@
-import tw from "tailwind-styled-components";
-
-export const Card = tw.div`
+export const Card = `
 flex 
 flex-row
 p-5
@@ -17,7 +15,7 @@ hover:border-indigo-600
 }
 `;
 
-export const CardCenter = tw.div`
+export const CardCenter = `
 flex 
 flex-row
 p-5
@@ -33,7 +31,7 @@ justify-center
 }
 `;
 
-export const Button = tw.button`
+export const Button = `
 bg-white
 hover:bg-gray-100
 text-gray-800
@@ -48,7 +46,7 @@ mx-4
 content-center
 `;
 
-export const Tag = tw.a`
+export const Tag = `
 rounded-full 
 text-gray-500 
 bg-gray-200 
@@ -65,28 +63,28 @@ m-4
 
 `;
 
-export const LanguageIcon = tw.img`
+export const LanguageIcon = `
 rounded-full
 w-9
 h-9
 max-w-none
 `;
 
-export const ProfileImg = tw.img`
+export const ProfileImg = `
 w-16
 h-16
 rounded-full
 mr-6
 `;
 
-export const UnderlineLink = tw.a`
+export const UnderlineLink = `
 underline 
 flex
 items-center
 px-3
 py-2
 `;
-export const TagContainer = tw.div`
+export const TagContainer =`
 flex 
 flex-wrap 
 justify-center 

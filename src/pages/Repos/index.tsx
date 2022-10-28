@@ -1,14 +1,14 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
-import { instanceAxios } from "../../services/axios";
+import { instanceAxios } from "../../services/QueryClient";
 import {
   CardCenter,
   LanguageIcon,
   Tag,
   TagContainer,
   UnderlineLink,
-} from "../../styles/StyledComponents/styledGlobal";
-import { API_DEFAULT_PARAMS } from "../../services/axios";
+} from "../../styles/styledGlobal";
+import { API_DEFAULT_PARAMS } from "../../services/QueryClient";
 
 interface Props {
   userId: string;
@@ -40,9 +40,7 @@ const Repos: FunctionComponent<Props> = ({ userId }) => {
                   {data?.map(
                     ({ name, id, language, html_url }: Repositories) => (
                       <Tag
-                        key={id}
-                        
-                      >
+                        key={id}>
                         <LanguageIcon
                           alt={`${language?.toLowerCase()}`}
                           src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${language?.toLowerCase()}/${language?.toLowerCase()}-original.svg`}

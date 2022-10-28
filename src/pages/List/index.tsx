@@ -1,30 +1,14 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
-import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/axios";
-import { DotsIcon } from "../../icons/iconList";
+import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/Axios";
+import { DotsIcon } from "../../icons";
 import { Link } from "react-router-dom";
 import Modal from "../../components/Modal";
 import Repos from "../Repos";
 import Starred from "../Starred";
-import {
-  Button,
-  Card,
-  ProfileImg,
-} from "../../styles/StyledComponents/styledGlobal";
-import {
-  TextField,
-  SearchButton,
-  SearchContainer,
-  IconCol,
-  ButtonCol,
-  InfoCol,
-  LoginText,
-  DotsCol,
-  DropdownButton,
-  Dropdown,
-  DotsButton,
-  Pagination,
-} from "./style";
+import * as globals from "../../styles/styledGlobal";
+import * as style from "./style";
+import { AxiosResponse } from "axios";
 
 interface Users {
   html_url: string;
@@ -94,7 +78,7 @@ const List: FunctionComponent = () => {
   const searchUser = () => {
     instanceAxios
       .get(`users/${search}`)
-      .then(({ data }) => {
+      .then(({data}:AxiosResponse<Users>) => {
         setErrorMessage("");
         setUsers([data]);
       })
@@ -102,39 +86,40 @@ const List: FunctionComponent = () => {
   };
 
   return (
-    <div>
+    <section>
       <div className="container flex mx-auto">
-        <TextField
+        <input
+          className={style.TextField}
           id="username"
           type="text"
           placeholder="Search Github Username"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <SearchButton onClick={() => searchUser()}>Search</SearchButton>
+        <button className={style.SearchButton} onClick={() => searchUser()}>Search</button>
       </div>
       <div className="flex justify-center m-8">
-        <Button onClick={() => back()}>Back</Button>
+        <button className={globals.Button} onClick={() => back()}>Back</button>
         <input
           value={pageId}
           type="number"
           min="0"
-          onChange={(e: any) => {
+          onChange={(e) => {
             setPageId(e.target.valueAsNumber);
           }}
         />
-        <Button onClick={() => next()}>Next</Button>
+        <button className={globals.Button} onClick={() => next()}>Next</button>
       </div>
       <div className="">
         {isFetching && <p>Loading...</p>}
         {errorMessage !== "" && <p>{errorMessage}</p>}
         {users?.map(({ avatar_url, login, html_url, id }: Users) => (
           <div key={id}>
-            <Card>
-              <IconCol>
-                <ProfileImg src={avatar_url} />
-              </IconCol>
-              <InfoCol>
-                <LoginText>{login}</LoginText>
+            <div className={globals.Card}>
+              <div className={style.IconCol}>
+                <img className={globals.ProfileImg} src={avatar_url} />
+              </div>
+              <div className={style.InfoCol} >
+                <h3 className={style.LoginText}>{login}</h3>
                 <a
                   href={`https://github.com/${login}`}
                   target="_blank"
@@ -142,51 +127,51 @@ const List: FunctionComponent = () => {
                 >
                   {html_url}
                 </a>
-              </InfoCol>
-              <ButtonCol>
-                <Button onClick={() => handleOpenModalRepos(login)}>
+              </div >
+              <div className={style.ButtonCol}>
+                <button className={globals.Button} onClick={() => handleOpenModalRepos(login)}>
                   repos
-                </Button>
-                <Button onClick={() => handleOpenModalStarred(login)}>
+                </button>
+                <button className={globals.Button} onClick={() => handleOpenModalStarred(login)}>
                   starred
-                </Button>
+                </button  >
                 <Link to={`/${login}`}>
-                  <Button>Details</Button>
+                  <button className={globals.Button} >Details</button>
                 </Link>
-              </ButtonCol>
-              <DotsCol>
-                <DotsButton id={`button_${id}`}>
+              </div>
+              <div className={style.DotsCol}>
+                <div className={style.DotsButton} id={`button_${id}`}>
                   <button onClick={() => setDropdown(dropdown)}>
                     <DotsIcon />
                   </button>
                   {dropdown && (
-                    <Dropdown id={`item_${id}`} className="">
+                    <div className={style.Dropdown} id={`item_${id}`} >
                       <ul>
                         <li>
-                          <DropdownButton
+                          <div className={style.DropdownButton}
                             onClick={() => handleOpenModalRepos(login)}
                           >
                             Repos
-                          </DropdownButton>
+                          </div>
                         </li>
                         <li>
-                          <DropdownButton
+                          <div className={style.DropdownButton}
                             onClick={() => handleOpenModalStarred(login)}
                           >
                             Starred
-                          </DropdownButton>
+                          </div>
                         </li>
                         <li>
                           <Link to={`/${login}`}>
-                            <DropdownButton>Details</DropdownButton>
+                            <div className={style.DropdownButton}>Details</div>
                           </Link>
                         </li>
                       </ul>
-                    </Dropdown>
+                    </div>
                   )}
-                </DotsButton>
-              </DotsCol>
-            </Card>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
         <Modal ref={modalStarredRef} name={"Starred"}>
@@ -196,7 +181,7 @@ const List: FunctionComponent = () => {
           <Repos userId={userId} />
         </Modal>
       </div>
-    </div>
+    </section>
   );
 };
 export default List;

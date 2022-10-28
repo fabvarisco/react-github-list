@@ -1,15 +1,11 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
-import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/axios";
-import {
-  Button,
-  Card,
-  ProfileImg,
-} from "../../styles/StyledComponents/styledGlobal";
+import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/Axios";
 import Repos from "../Repos";
 import Starred from "../Starred";
-import { TitleText } from "./style";
+import * as style from "./style";
+import * as globals from "../../styles/styledGlobal";
 
 interface User {
   login: string;
@@ -30,8 +26,7 @@ const Profile: FunctionComponent = () => {
 
   return (
     <Fragment>
-      {isFetching && <p>Loading...</p>}
-      {!isFetching && (
+      {!isFetching ? (
         <Fragment>
           <Card>
             <ProfileImg src={data?.avatar_url} />
@@ -42,18 +37,18 @@ const Profile: FunctionComponent = () => {
             </div>
             <div>
               <a target={"_blank"} href={`https://github.com/${data?.login}`}>
-                <Button>Github</Button>
+                <button className={globals.Button}>Github</button>
               </a>
             </div>
           </Card>
-          <TitleText>Repositories</TitleText>
+          <h3 className={style.TitleText}>Repositories</h3>
           <Repos userId={data?.login || ""} />
-          <TitleText>Starred</TitleText>
+          <h3 className={style.TitleText}>Starred</h3>
           <Starred userId={data?.login || ""} />
         </Fragment>
-      )}
+      ) : <p>Loading...</p>}
       <Link to={"/"} className="flex flex-col m-4">
-        <Button>Back</Button>
+        <button className={globals.Button}>Back</button>
       </Link>
     </Fragment>
   );
