@@ -2,8 +2,8 @@ import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/Axios";
-import Repos from "../Repos";
-import Starred from "../Starred";
+import Repos from "../../components/Repos";
+import Starred from "../../components/Starred";
 import * as style from "./style";
 import * as globals from "../../styles/styledGlobal";
 
@@ -28,8 +28,8 @@ const Profile: FunctionComponent = () => {
     <Fragment>
       {!isFetching ? (
         <Fragment>
-          <Card>
-            <ProfileImg src={data?.avatar_url} />
+          <div className={globals.Card}>
+            <img className={globals.ProfileImg} src={data?.avatar_url} />
             <div className="grow">
               <h3>{data?.login}</h3>
               <h4 className="mt-1 text-gray-400">{data?.name}</h4>
@@ -40,7 +40,7 @@ const Profile: FunctionComponent = () => {
                 <button className={globals.Button}>Github</button>
               </a>
             </div>
-          </Card>
+          </div>
           <h3 className={style.TitleText}>Repositories</h3>
           <Repos userId={data?.login || ""} />
           <h3 className={style.TitleText}>Starred</h3>

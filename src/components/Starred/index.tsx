@@ -1,8 +1,9 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
-import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/QueryClient";
+import { Link } from "react-router-dom";
+import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/Axios";
 
-import * as style from "../../styles/styledGlobal";
+import * as globals from "../../styles/styledGlobal";
 
 interface Props {
   userId: string;
@@ -27,31 +28,31 @@ const Starred: FunctionComponent<Props> = ({ userId }) => {
     <Fragment>
       {!isFetching && (
         <Fragment>
-          <CardCenter>
-            <TagContainer>
+          <div className={globals.CardCenter}>
+            <div className={globals.TagContainer}>
               {data && data?.length > 0 ? (
                 <Fragment>
                   {data?.map(({ name, id, language, html_url }: Starreds) => (
-                    <Tag key={id}>
-                      <LanguageIcon
+                    <div className={globals.Tag} key={id}>
+                      <img className={globals.LanguageIcon}
                         alt={`${language?.toLowerCase()}`}
                         src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${language?.toLowerCase()}/${language?.toLowerCase()}-original.svg`}
                         onError={({ currentTarget }) => {
                           currentTarget.onerror = null;
-                          currentTarget.src = "/svg/generic-icon.svg";
+                          currentTarget.src = "/assets/svg/generic-icon.svg";
                         }}
                       />
-                      <UnderlineLink href={html_url} target="_blank">
+                      <a className={globals.UnderlineLink} href={html_url} target="_blank">
                         {name}
-                      </UnderlineLink>
-                    </Tag>
+                      </a>
+                    </div>
                   ))}
                 </Fragment>
               ) : (
                 <h2>{userId} doesn’t have any starred repositories yet.</h2>
               )}
-            </TagContainer>
-          </CardCenter>
+            </div>
+          </div>
         </Fragment>
       )}
     </Fragment>

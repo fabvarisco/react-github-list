@@ -1,11 +1,11 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { Fragment, FunctionComponent, useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/Axios";
 import { DotsIcon } from "../../icons";
 import { Link } from "react-router-dom";
 import Modal from "../../components/Modal";
-import Repos from "../Repos";
-import Starred from "../Starred";
+import Repos from "../../components/Repos";
+import Starred from "../../components/Starred";
 import * as globals from "../../styles/styledGlobal";
 import * as style from "./style";
 import { AxiosResponse } from "axios";
@@ -78,7 +78,7 @@ const List: FunctionComponent = () => {
   const searchUser = () => {
     instanceAxios
       .get(`users/${search}`)
-      .then(({data}:AxiosResponse<Users>) => {
+      .then(({ data }: AxiosResponse<Users>) => {
         setErrorMessage("");
         setUsers([data]);
       })
@@ -110,70 +110,68 @@ const List: FunctionComponent = () => {
         <button className={globals.Button} onClick={() => next()}>Next</button>
       </div>
       <div className="">
-        {isFetching && <p>Loading...</p>}
-        {errorMessage !== "" && <p>{errorMessage}</p>}
-        {users?.map(({ avatar_url, login, html_url, id }: Users) => (
-          <div key={id}>
-            <div className={globals.Card}>
-              <div className={style.IconCol}>
-                <img className={globals.ProfileImg} src={avatar_url} />
-              </div>
-              <div className={style.InfoCol} >
-                <h3 className={style.LoginText}>{login}</h3>
-                <a
-                  href={`https://github.com/${login}`}
-                  target="_blank"
-                  className="underline"
-                >
-                  {html_url}
-                </a>
-              </div >
-              <div className={style.ButtonCol}>
-                <button className={globals.Button} onClick={() => handleOpenModalRepos(login)}>
-                  repos
-                </button>
-                <button className={globals.Button} onClick={() => handleOpenModalStarred(login)}>
-                  starred
-                </button  >
-                <Link to={`/${login}`}>
-                  <button className={globals.Button} >Details</button>
-                </Link>
-              </div>
-              <div className={style.DotsCol}>
-                <div className={style.DotsButton} id={`button_${id}`}>
-                  <button onClick={() => setDropdown(dropdown)}>
-                    <DotsIcon />
-                  </button>
-                  {dropdown && (
-                    <div className={style.Dropdown} id={`item_${id}`} >
-                      <ul>
-                        <li>
-                          <div className={style.DropdownButton}
-                            onClick={() => handleOpenModalRepos(login)}
-                          >
-                            Repos
-                          </div>
-                        </li>
-                        <li>
-                          <div className={style.DropdownButton}
-                            onClick={() => handleOpenModalStarred(login)}
-                          >
-                            Starred
-                          </div>
-                        </li>
-                        <li>
-                          <Link to={`/${login}`}>
-                            <div className={style.DropdownButton}>Details</div>
-                          </Link>
-                        </li>
-                      </ul>
+        {errorMessage !== "" ? <p>{errorMessage}</p> : null}
+        {!isFetching ?
+          <Fragment>
+            {users?.map(({ avatar_url, login, html_url, id }: Users) => (
+              <div key={id}>
+                <div className={globals.Card}>
+                  <div className={style.IconCol}>
+                    <img className={globals.ProfileImg} src={avatar_url} />
+                  </div>
+                  <div className={style.InfoCol} >
+                    <h3 className={style.LoginText}>{login}</h3>
+                    <a
+                      href={`https://github.com/${login}`}
+                      target="_blank"
+                      className="underline"
+                    >
+                      {html_url}
+                    </a>
+                  </div >
+                  <div className={style.ButtonCol}>
+                    <button className={globals.Button} onClick={() => handleOpenModalRepos(login)}>
+                      repos
+                    </button>
+                    <button className={globals.Button} onClick={() => handleOpenModalStarred(login)}>
+                      starred
+                    </button  >
+                    <Link to={`/${login}`}>
+                      <button className={globals.Button} >Details</button>
+                    </Link>
+                  </div>
+                  <div className={style.DotsCol}>
+                    <div className={style.DotsButton} id={`button_${id}`}>
+                      <button onClick={() => setDropdown(dropdown)}>
+                        <DotsIcon />
+                      </button>
+                      {dropdown && (
+                        <div className={style.Dropdown} id={`item_${id}`} >
+                          <ul>
+                            <li className={style.DropdownButton}
+                                onClick={() => handleOpenModalRepos(login)}
+                              >
+                                Repos
+                            </li>
+                            <li className={style.DropdownButton} onClick={() => handleOpenModalStarred(login)}>
+                                Starred
+                            </li>
+                            <li>
+                              <Link to={`/${login}`}>
+                                <div className={style.DropdownButton}>Details</div>
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        ))}
+            ))}
+          </Fragment>
+          : <p>Loading...</p>}
+
         <Modal ref={modalStarredRef} name={"Starred"}>
           <Starred userId={userId} />
         </Modal>
