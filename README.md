@@ -11,7 +11,7 @@ A simple application to search and see github users repos and starred repos
 ## Built With
 * React
 * Typescript
-* TailwindCSS and Tailwind Styled Components
+* Tailwind
 
 ## App
 * Github Page: _not ready yet!_
