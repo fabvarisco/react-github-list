@@ -9,9 +9,10 @@ A simple application to search and see github users repos and starred repos
 * See users starred repos
 
 ## Built With
+* Vite
 * React
 * Typescript
-* TailwindCSS and Tailwind Styled Components
+* Tailwind
 
 ## App
 * Github Page: _not ready yet!_
