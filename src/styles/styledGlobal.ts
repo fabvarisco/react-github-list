@@ -44,6 +44,7 @@ rounded
 shadow
 mx-4
 content-center
+my-2
 `;
 
 export const Tag = `

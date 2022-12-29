@@ -34,7 +34,8 @@ mx-auto`;
 export const IconCol = `
 flex-none`;
 export const InfoCol = `
-grow`;
+grow
+overflow-hidden`;
 
 export const ButtonCol = `
 flex-none  self-center hidden sm:block`;

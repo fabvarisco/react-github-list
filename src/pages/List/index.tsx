@@ -90,7 +90,7 @@ const List: FunctionComponent = () => {
         />
         <button className={style.SearchButton} onClick={() => searchUser()}>Search</button>
       </div>
-      <div className="flex justify-center m-8">
+      <div className="flex justify-center m-8 flex-wrap	">
         <button className={globals.Button} onClick={() => back()}>Back</button>
         <input
           value={pageId}
@@ -139,7 +139,7 @@ const List: FunctionComponent = () => {
                   <button onClick={() => setDropdown(dropdown)}>
                     <DotsIcon />
                   </button>
-                  {dropdown && (
+                  {dropdown ? (
                     <div className={style.Dropdown} id={`item_${id}`} >
                       <ul>
                         <li className={style.DropdownButton}
@@ -157,7 +157,7 @@ const List: FunctionComponent = () => {
                         </li>
                       </ul>
                     </div>
-                  )}
+                  ) : null}
                 </div>
               </div>
             </div>
