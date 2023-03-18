@@ -1,9 +1,9 @@
-import Repos from "../Repos"
-import Starred from "../Starred"
-import * as globals from "../../styles/styledGlobal";
-import { IUsers } from "src/interfaces/IUser";
+
+import * as globals from "@styles/styledGlobal";
 import * as style from "./style";
 import { FunctionComponent } from "react";
+import Repos from "@components/Repos";
+import Starred from "@components/Starred";
 
 interface IUserProfile {
     avatar_url: string | undefined;
@@ -11,7 +11,6 @@ interface IUserProfile {
     name: string | undefined;
     bio: string | undefined;
 };
-
 
 const ProfileCard: FunctionComponent<IUserProfile> = ({
     avatar_url,

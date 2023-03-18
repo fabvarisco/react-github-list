@@ -2,14 +2,16 @@ import {
   FunctionComponent,
   ReactNode,
 } from "react";
-import Footer from "./Footer/footer";
-import Navbar from "./Navbar/navbar";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
+
+
 
 type Props = {
   children: ReactNode;
 };
 
-const Layout: FunctionComponent<Props> = ({children}) => {
+const Layout: FunctionComponent<Props> = ({ children }) => {
   return (
     <div className="content">
       <Navbar />

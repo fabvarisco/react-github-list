@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 import { useQuery } from "react-query";
 
-import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/Axios";
-import * as globals from "../../styles/styledGlobal";
+import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
+import * as globals from "@styles/styledGlobal";
 
 interface IProps {
   userId: string;

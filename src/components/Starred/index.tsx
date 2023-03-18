@@ -1,23 +1,21 @@
 import { Fragment, FunctionComponent } from "react";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
-import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/Axios";
+import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
+import * as globals from "@styles/styledGlobal";
 
-import * as globals from "../../styles/styledGlobal";
-
-interface Props {
+interface IProps {
   userId: string;
 };
 
-interface Starreds {
+interface IStarreds {
   name: string;
   id: string;
   language: string;
   html_url: string;
 };
 
-const Starred: FunctionComponent<Props> = ({ userId }) => {
-  const { data, isFetching } = useQuery<Starreds[]>("starred", async () => {
+const Starred: FunctionComponent<IProps> = ({ userId }) => {
+  const { data, isFetching } = useQuery<IStarreds[]>("starred", async () => {
     const { data } = await instanceAxios.get(`users/${userId}/starred`, {
       params: { ...API_DEFAULT_PARAMS },
     });
@@ -32,7 +30,7 @@ const Starred: FunctionComponent<Props> = ({ userId }) => {
             <div className={globals.TagContainer}>
               {data && data?.length > 0 ? (
                 <Fragment>
-                  {data?.map(({ name, id, language, html_url }: Starreds) => (
+                  {data?.map(({ name, id, language, html_url }: IStarreds) => (
                     <div className={globals.Tag} key={id}>
                       <img className={globals.LanguageIcon}
                         alt={`${language?.toLowerCase()}`}

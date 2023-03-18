@@ -6,17 +6,17 @@ import {
   useState,
 } from "react";
 
-interface Ref {
+interface IRef {
   handleOpenModal: () => void;
 };
 
-interface Props {
+interface IProps {
   children: ReactNode;
   name: string;
 };
 
-const Modal: ForwardRefRenderFunction<Ref, Props> = (
-  { children, name }: Props,
+const Modal: ForwardRefRenderFunction<IRef, IProps> = (
+  { children, name }: IProps,
   ref
 ) => {
   const [visible, setVisible] = useState<boolean>(false);

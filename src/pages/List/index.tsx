@@ -2,14 +2,14 @@ import { Fragment, FunctionComponent, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { AxiosResponse } from "axios";
-import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/Axios";
-import { DotsIcon } from "../../icons";
-import { IUsers } from "../../interfaces/IUser";
-import Modal from "../../components/Modal";
-import Repos from "../../components/Repos";
-import Starred from "../../components/Starred";
-import * as globals from "../../styles/styledGlobal";
+import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
+import { IUsers } from "@interfaces/IUser";
+import Modal from "@components/Modal";
+import Repos from "@components/Repos";
+import Starred from "@components/Starred";
+import * as globals from "@styles/styledGlobal";
 import * as style from "./style";
+import { DotsIcon } from "Icons";
 
 
 const List: FunctionComponent = () => {

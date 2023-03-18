@@ -1,4 +1,6 @@
-export const DotsIcon = () => {
+import { FunctionComponent } from "react";
+
+export const DotsIcon:FunctionComponent = () => {
   return (
     <svg
       className="h-8 w-8 text-black-500"
@@ -17,7 +19,7 @@ export const DotsIcon = () => {
   );
 };
 
-export const GenericIcon = () => {
+export const GenericIcon:FunctionComponent = () => {
   return (
     <svg
       id="Layer_1"

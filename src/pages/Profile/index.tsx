@@ -1,11 +1,11 @@
-import { Fragment, FunctionComponent } from "react";
+import ProfileCard from "@components/ProfileCard";
+import { IUsers } from "@interfaces/IUser";
+import { FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
-import { API_DEFAULT_PARAMS, instanceAxios } from "../../services/Axios";
-import { IUsers } from "src/interfaces/IUser";
+import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
 
-import * as globals from "../../styles/styledGlobal";
-import ProfileCard from "src/components/ProfileCard";
+import * as globals from "@styles/styledGlobal";
 
 const Profile: FunctionComponent = () => {
   const { login } = useParams();
