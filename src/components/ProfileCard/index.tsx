@@ -4,15 +4,10 @@ import * as style from "./style";
 import { FunctionComponent } from "react";
 import Repos from "@components/Repos";
 import Starred from "@components/Starred";
+import { IUsers } from "@interfaces/IUser";
 
-interface IUserProfile {
-    avatar_url: string | undefined;
-    login: string | undefined;
-    name: string | undefined;
-    bio: string | undefined;
-};
 
-const ProfileCard: FunctionComponent<IUserProfile> = ({
+const ProfileCard: FunctionComponent<IUsers> = ({
     avatar_url,
     login,
     name,
@@ -34,9 +29,9 @@ const ProfileCard: FunctionComponent<IUserProfile> = ({
                 </div>
             </div>
             <h3 className={style.TitleText}>Repositories</h3>
-            <Repos userId={login || ""} />
+            <Repos userId={login} />
             <h3 className={style.TitleText}>Starred</h3>
-            <Starred userId={login || ""} />
+            <Starred userId={login} />
         </>)
 }
 

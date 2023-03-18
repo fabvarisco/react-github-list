@@ -1,15 +1,11 @@
 import { Fragment, FunctionComponent, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { AxiosResponse } from "axios";
-import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
 import { IUsers } from "@interfaces/IUser";
-import Modal from "@components/Modal";
-import Repos from "@components/Repos";
-import Starred from "@components/Starred";
 import * as globals from "@styles/styledGlobal";
 import * as style from "./style";
-import { DotsIcon } from "Icons";
+import Card from "@components/Card";
+import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
 
 
 const List: FunctionComponent = () => {
@@ -19,20 +15,6 @@ const List: FunctionComponent = () => {
   const [pageId, setPageId] = useState<number>(13788355);
 
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [dropdown, setDropdown] = useState<boolean[]>([]);
-
-  const modalStarredRef = useRef<any>(null);
-  const modalReposRef = useRef<any>(null);
-
-  const handleOpenModalRepos = (user: string) => {
-    setUserId(user);
-    modalReposRef.current?.handleOpenModal();
-  };
-
-  const handleOpenModalStarred = (user: string) => {
-    setUserId(user);
-    modalStarredRef.current?.handleOpenModal();
-  };
 
   const fetchUsers = async () => {
     const { data } = await instanceAxios.get("users", {
@@ -106,71 +88,11 @@ const List: FunctionComponent = () => {
       {!isFetching ?
         <Fragment>
           {/*TODO - Create Card component*/}
-          {users?.map(({ avatar_url, login, html_url, id }: IUsers) => (
-            <div className={globals.Card} key={id}>
-              <div className={style.IconCol}>
-                <img className={globals.ProfileImg} src={avatar_url} />
-              </div>
-              <div className={style.InfoCol} >
-                <h3 className={style.LoginText}>{login}</h3>
-                <a
-                  href={`https://github.com/${login}`}
-                  target="_blank"
-                  className="underline"
-                >
-                  {html_url}
-                </a>
-              </div >
-              <div className={style.ButtonCol}>
-                <button className={globals.Button} onClick={() => handleOpenModalRepos(login)}>
-                  repos
-                </button>
-                <button className={globals.Button} onClick={() => handleOpenModalStarred(login)}>
-                  starred
-                </button  >
-                <Link to={`/${login}`}>
-                  <button className={globals.Button} >Details</button>
-                </Link>
-              </div>
-
-              {/*TODO - Create dots component*/}
-              <div className={style.DotsCol}>
-                <div className={style.DotsButton} id={`button_${id}`}>
-                  <button onClick={() => setDropdown(dropdown)}>
-                    <DotsIcon />
-                  </button>
-                  {dropdown ? (
-                    <div className={style.Dropdown} id={`item_${id}`} >
-                      <ul>
-                        <li className={style.DropdownButton}
-                          onClick={() => handleOpenModalRepos(login)}
-                        >
-                          Repos
-                        </li>
-                        <li className={style.DropdownButton} onClick={() => handleOpenModalStarred(login)}>
-                          Starred
-                        </li>
-                        <li>
-                          <Link to={`/${login}`}>
-                            <div className={style.DropdownButton}>Details</div>
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  ) : null}
-                </div>
-              </div>
-            </div>
+          {users?.map((data: IUsers) => (
+           <Card {...data}/>
           ))}
         </Fragment>
         : <p>Loading...</p>}
-
-      <Modal ref={modalStarredRef} name={"Starred"}>
-        <Starred userId={userId} />
-      </Modal>
-      <Modal ref={modalReposRef} name={"Repos"}>
-        <Repos userId={userId} />
-      </Modal>
     </section>
   );
 };

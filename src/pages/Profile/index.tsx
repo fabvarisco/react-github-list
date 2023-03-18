@@ -4,8 +4,8 @@ import { FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
-
 import * as globals from "@styles/styledGlobal";
+
 
 const Profile: FunctionComponent = () => {
   const { login } = useParams();
@@ -17,15 +17,13 @@ const Profile: FunctionComponent = () => {
     return data;
   });
 
+  if (!isFetching) return <p>Loading...</p>;
+
   return (
     <section>
-      {!isFetching ? (
-        <ProfileCard
-          avatar_url={data?.avatar_url}
-          login={data?.login}
-          name={data?.name}
-          bio={data?.bio} />
-      ) : <p>Loading...</p>}
+      {data ? (
+        <ProfileCard {...data} />
+      ) : null}
       <Link to={"/"} className="flex flex-col m-4">
         <button className={globals.Button}>Back</button>
       </Link>

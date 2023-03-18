@@ -17,18 +17,15 @@
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {
-      "@components": ["components/index"],
       "@components/*": ["components/*"],
       "@interfaces/*": ["interfaces/*"],
-      "@layout": ["layout/index"],
-      "@layout/*": ["layout/*"],
-      "@pages/*": ["pages/*"],
       "@services/*": ["services/*"],
       "@styles/*": ["styles/*"],
+      "@layout/*": ["layout/*"],
+      "@pages/*": ["pages/*"],
+      "@layout": ["layout/index"],
       "@icons/*": ["icons/index"],
     },
   },
-  "include": ["src"],
-
   "references": [{ "path": "./tsconfig.node.json" }]
 }
