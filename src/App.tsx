@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import Layout from "./layout";
-import List from "./pages/List";
-import Profile from "./pages/Profile";
+import Layout from "@layout/index";
+import List from "@pages/List";
+import Profile from "@pages/Profile";
 import "./styles/globals.css";
 
 function App() {

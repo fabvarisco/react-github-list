@@ -34,14 +34,7 @@ const Repos: FunctionComponent<IProps> = ({ userId }) => {
                 ({ name, id, language, html_url }: IRepositories) => (
                   <div className={globals.Tag}
                     key={id}>
-                    <img className={globals.LanguageIcon}
-                      alt={`${language?.toLowerCase()}`}
-                      src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${language?.toLowerCase()}/${language?.toLowerCase()}-original.svg`}
-                      onError={({ currentTarget }) => {
-                        currentTarget.onerror = null;
-                        currentTarget.src = "/assets/svg/generic-icon.svg";
-                      }}
-                    />
+
                     <a className={globals.UnderlineLink} href={html_url} target="_blank">
                       {name}
                     </a>
