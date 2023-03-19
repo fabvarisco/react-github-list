@@ -2,8 +2,8 @@ import {
   FunctionComponent,
   ReactNode,
 } from "react";
-import Footer from "@layout/Footer";
-import Navbar from "@layout/Navbar";
+import Footer from "@components/Footer";
+import Navbar from "@components/Navbar";
 
 
 type Props = {
