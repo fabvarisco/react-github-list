@@ -50,7 +50,6 @@ sm:hidden
 `;
 
 export const DotsButton = `
-absolute
 activeButton
 -mt-10 
 -ml-8 

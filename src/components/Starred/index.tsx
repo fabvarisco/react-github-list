@@ -1,4 +1,4 @@
-import { Fragment, FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
 import * as globals from "@styles/styledGlobal";
@@ -23,13 +23,13 @@ const Starred: FunctionComponent<IProps> = ({ userId }) => {
   });
 
   return (
-    <Fragment>
+    <>
       {!isFetching && (
-        <Fragment>
+        <>
           <div className={globals.CardCenter}>
             <div className={globals.TagContainer}>
               {data && data?.length > 0 ? (
-                <Fragment>
+                <>
                   {data?.map(({ name, id, language, html_url }: IStarreds) => (
                     <div className={globals.Tag} key={id}>
                       <img className={globals.LanguageIcon}
@@ -45,15 +45,15 @@ const Starred: FunctionComponent<IProps> = ({ userId }) => {
                       </a>
                     </div>
                   ))}
-                </Fragment>
+                </>
               ) : (
                 <h2>{userId} doesn’t have any starred repositories yet.</h2>
               )}
             </div>
           </div>
-        </Fragment>
+        </>
       )}
-    </Fragment>
+    </>
   );
 };
 

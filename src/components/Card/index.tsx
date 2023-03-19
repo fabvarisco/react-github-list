@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { IUsers } from "@interfaces/IUser";
 import { Link } from "react-router-dom";
 import * as globals from "@styles/styledGlobal";
@@ -8,21 +8,38 @@ import Starred from "@components/Starred";
 import Repos from "@components/Repos";
 import { DotsIcon } from "@icons/*";
 const Card: FunctionComponent<IUsers> = ({ avatar_url, login, html_url, id }) => {
-    const [dropdown, setDropdown] = useState<boolean[]>([]);
+    const [dropdown, setDropdown] = useState<boolean>(false);
     const [userId, setUserId] = useState<string>("");
 
     const modalStarredRef = useRef<any>(null);
     const modalReposRef = useRef<any>(null);
+    const dotModal = useRef<any>(null);
+
+    const closeDotModal = (e:Event) => {
+        if (dotModal.current && !dotModal.current.contains(e.target)) {
+            setDropdown(false);
+          }
+    }
 
     const handleOpenModalRepos = (user: string) => {
+        setDropdown(false);
         setUserId(user);
         modalReposRef.current?.handleOpenModal();
     };
 
     const handleOpenModalStarred = (user: string) => {
+        setDropdown(false);
         setUserId(user);
         modalStarredRef.current?.handleOpenModal();
     };
+
+
+    useEffect(() => {
+        document.addEventListener('click', closeDotModal, true);
+        return () => {
+          document.removeEventListener('click', closeDotModal, true);
+        };
+      }, []);
 
     return (
         <>
@@ -52,14 +69,13 @@ const Card: FunctionComponent<IUsers> = ({ avatar_url, login, html_url, id }) =>
                     </Link>
                 </div>
 
-                {/*TODO - Create dots component*/}
-                <div className={style.DotsCol}>
-                    <div className={style.DotsButton} id={`button_${id}`}>
-                        <button onClick={() => setDropdown(dropdown)}>
+                <div className={style.DotsCol} ref={dotModal}>
+                    <div className={style.DotsButton} >
+                        <button onClick={() => setDropdown(true)}>
                             <DotsIcon />
                         </button>
                         {dropdown ? (
-                            <div className={style.Dropdown} id={`item_${id}`} >
+                            <div className={style.Dropdown} >
                                 <ul>
                                     <li className={style.DropdownButton}
                                         onClick={() => handleOpenModalRepos(login)}
