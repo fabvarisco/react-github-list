@@ -2,6 +2,7 @@ import {
   FunctionComponent,
   ReactNode,
 } from "react";
+import Footer from "./Footer";
 
 
 
@@ -13,6 +14,7 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
   return (
     <div className="content">
       {children}
+      <Footer />
     </div>
   );
 };
