@@ -1,4 +1,4 @@
-import { Fragment, FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { AxiosResponse } from "axios";
 import { IUsers } from "@interfaces/IUser";
@@ -72,26 +72,27 @@ const List: FunctionComponent = () => {
         />
         <button className={style.SearchButton} onClick={() => searchUser()}>Search</button>
       </div>
-      <div className="flex justify-center m-8 flex-wrap	">
+      <div className="flex justify-center my-8 mx-2 flex-wrap">
         <button className={globals.Button} onClick={() => back()}>Back</button>
         <input
+          placeholder=""
           value={pageId}
           type="number"
           min="0"
           onChange={(e) => {
             setPageId(e.target.valueAsNumber);
           }}
+          className="s:w-20 lg:w-auto"
         />
         <button className={globals.Button} onClick={() => next()}>Next</button>
       </div>
       {errorMessage !== "" ? <p>{errorMessage}</p> : null}
       {!isFetching ?
-        <Fragment>
-          {/*TODO - Create Card component*/}
+        <>
           {users?.map((data: IUsers) => (
-           <Card {...data}/>
+           <Card {...data} key={data.id}/>
           ))}
-        </Fragment>
+        </>
         : <p>Loading...</p>}
     </section>
   );

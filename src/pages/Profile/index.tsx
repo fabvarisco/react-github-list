@@ -1,10 +1,10 @@
-import ProfileCard from "@components/ProfileCard";
 import { IUsers } from "@interfaces/IUser";
 import { FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
 import * as globals from "@styles/styledGlobal";
+import ProfileCard from "@components/ProfileCard";
 
 
 const Profile: FunctionComponent = () => {
@@ -17,16 +17,17 @@ const Profile: FunctionComponent = () => {
     return data;
   });
 
-  if (!isFetching) return <p>Loading...</p>;
 
   return (
     <section>
-      {data ? (
-        <ProfileCard {...data} />
-      ) : null}
-      <Link to={"/"} className="flex flex-col m-4">
-        <button className={globals.Button}>Back</button>
-      </Link>
+      {!isFetching ? <>
+        {data ? (
+          <ProfileCard {...data} />
+        ) : null}
+        <Link to={"/"} className="flex flex-col m-4">
+          <button className={globals.Button}>Back</button>
+        </Link>
+      </> : null}
     </section>
   );
 };
