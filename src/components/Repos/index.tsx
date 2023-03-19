@@ -36,7 +36,7 @@ const Repos: FunctionComponent<IProps> = ({ userId }) => {
                     <div className={globals.Tag}
                       key={id}>
                       <img className={globals.LanguageIcon}
-                        alt={`${language?.toLowerCase()}`}
+                        alt={language?.toLowerCase()}
                         src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${language?.toLowerCase()}/${language?.toLowerCase()}-original.svg`}
                         onError={({ currentTarget }) => {
                           currentTarget.onerror = null;

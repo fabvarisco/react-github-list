@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 import { useQuery } from "react-query";
 import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
 import * as globals from "@styles/styledGlobal";
+import axios from "axios";
 
 interface IProps {
   userId: string;
@@ -15,12 +16,15 @@ interface IStarreds {
 };
 
 const Starred: FunctionComponent<IProps> = ({ userId }) => {
+
+
   const { data, isFetching } = useQuery<IStarreds[]>("starred", async () => {
     const { data } = await instanceAxios.get(`users/${userId}/starred`, {
       params: { ...API_DEFAULT_PARAMS },
     });
     return data;
   });
+
 
   return (
     <>
