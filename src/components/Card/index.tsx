@@ -7,6 +7,7 @@ import Modal from "@components/Modal";
 import Starred from "@components/Starred";
 import Repos from "@components/Repos";
 import { DotsIcon } from "@icons/*";
+
 const Card: FunctionComponent<IUsers> = ({ avatar_url, login, html_url, id }) => {
     const [dropdown, setDropdown] = useState<boolean>(false);
     const [userId, setUserId] = useState<string>("");

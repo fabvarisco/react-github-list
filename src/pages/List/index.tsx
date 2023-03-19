@@ -3,15 +3,12 @@ import { useQuery } from "react-query";
 import { AxiosResponse } from "axios";
 import { IUsers } from "@interfaces/IUser";
 import * as globals from "@styles/styledGlobal";
-import * as style from "./style";
 import Card from "@components/Card";
 import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
-
 
 const List: FunctionComponent = () => {
   const [search, setSearch] = useState<string>("");
   const [users, setUsers] = useState<IUsers[]>([]);
-  const [userId, setUserId] = useState<string>("");
   const [pageId, setPageId] = useState<number>(13788355);
 
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -64,13 +61,13 @@ const List: FunctionComponent = () => {
     <section>
       <div className="container flex mx-auto">
         <input
-          className={style.TextField}
+          className={"focus:ring-indigo-500 focus:border-indigo-500 block pl-7 pr-12 sm:text-sm border-gray-300 h-8 ml-2 w-full border-none"}
           id="username"
           type="text"
           placeholder="Search Github Username"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button className={style.SearchButton} onClick={() => searchUser()}>Search</button>
+        <button className={"flex items-center justify-center px-4 border mr-2"} onClick={() => searchUser()}>Search</button>
       </div>
       <div className="flex justify-center my-8 mx-2 flex-wrap">
         <button className={globals.Button} onClick={() => back()}>Back</button>
