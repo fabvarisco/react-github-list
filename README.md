@@ -15,7 +15,7 @@ A simple application to search and see github users repos and starred repos
 * Tailwind
 
 ## App
-* Github Page: _not ready yet!_
+* Link: https://react-github-list-git-master-fabriciovo.vercel.app/
 
 
 ## Credits
