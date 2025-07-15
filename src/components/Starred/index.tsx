@@ -22,38 +22,44 @@ const Starred: FunctionComponent<IProps> = ({ userId }) => {
     return data;
   });
 
-  if (!isFetching) return null;
-
   return (
-    <div className={globals.CardCenter}>
-      <div className={globals.TagContainer}>
-        {data && data?.length > 0 ? (
-          <>
-            {data?.map(({ name, id, language, html_url }: IStarreds) => (
-              <div className={globals.Tag} key={id}>
-                <img
-                  className={globals.LanguageIcon}
-                  alt={`${language?.toLowerCase()}`}
-                  src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${language?.toLowerCase()}/${language?.toLowerCase()}-original.svg`}
-                  onError={({ currentTarget }) => {
-                    currentTarget.src = "/assets/svg/generic-icon.svg";
-                  }}
-                />
-                <a
-                  className={globals.UnderlineLink}
-                  href={html_url}
-                  target="_blank"
-                >
-                  {name}
-                </a>
-              </div>
-            ))}
-          </>
-        ) : (
-          <h2>{userId} doesn’t have any starred repositories yet.</h2>
-        )}
-      </div>
-    </div>
+    <>
+      {isFetching ? (
+        <>Loading...</>
+      ) : (
+        <>
+          <div className={globals.CardCenter}>
+            <div className={globals.TagContainer}>
+              {data && data?.length > 0 ? (
+                <>
+                  {data?.map(({ name, id, language, html_url }: IStarreds) => (
+                    <div className={globals.Tag} key={id}>
+                      <img
+                        className={globals.LanguageIcon}
+                        alt={`${language?.toLowerCase()}`}
+                        src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${language?.toLowerCase()}/${language?.toLowerCase()}-original.svg`}
+                        onError={({ currentTarget }) => {
+                          currentTarget.src = "/assets/svg/generic-icon.svg";
+                        }}
+                      />
+                      <a
+                        className={globals.UnderlineLink}
+                        href={html_url}
+                        target="_blank"
+                      >
+                        {name}
+                      </a>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <h2>{userId} doesn’t have any starred repositories yet.</h2>
+              )}
+            </div>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 

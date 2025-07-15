@@ -16,14 +16,18 @@ const Profile: FunctionComponent = () => {
     return data;
   });
 
-  if (!isFetching) return null;
-
   return (
     <section>
-        {data ? <ProfileCard {...data} /> : null}
-        <Link to={"/"} className="flex flex-col m-4">
-          <button className={globals.Button}>Back</button>
-        </Link>
+      {isFetching ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          {data ? <ProfileCard {...data} /> : null}
+          <Link to={"/"} className="flex flex-col m-4">
+            <button className={globals.Button}>Back</button>
+          </Link>
+        </>
+      )}
     </section>
   );
 };
