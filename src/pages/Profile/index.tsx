@@ -6,7 +6,6 @@ import { API_DEFAULT_PARAMS, instanceAxios } from "@services/Axios";
 import * as globals from "@styles/styledGlobal";
 import ProfileCard from "@components/ProfileCard";
 
-
 const Profile: FunctionComponent = () => {
   const { login } = useParams();
 
@@ -17,17 +16,14 @@ const Profile: FunctionComponent = () => {
     return data;
   });
 
+  if (!isFetching) return null;
 
   return (
     <section>
-      {!isFetching ? <>
-        {data ? (
-          <ProfileCard {...data} />
-        ) : null}
+        {data ? <ProfileCard {...data} /> : null}
         <Link to={"/"} className="flex flex-col m-4">
           <button className={globals.Button}>Back</button>
         </Link>
-      </> : null}
     </section>
   );
 };

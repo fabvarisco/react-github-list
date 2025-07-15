@@ -10,7 +10,6 @@ const List: FunctionComponent = () => {
   const [search, setSearch] = useState<string>("");
   const [users, setUsers] = useState<IUsers[]>([]);
   const [pageId, setPageId] = useState<number>(13788355);
-
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const fetchUsers = async () => {
@@ -61,16 +60,25 @@ const List: FunctionComponent = () => {
     <section>
       <div className="container flex mx-auto">
         <input
-          className={"focus:ring-indigo-500 focus:border-indigo-500 block pl-7 pr-12 sm:text-sm border-gray-300 h-8 ml-2 w-full border-none"}
+          className={
+            "focus:ring-indigo-500 focus:border-indigo-500 block pl-7 pr-12 sm:text-sm border-gray-300 h-8 ml-2 w-full border-none"
+          }
           id="username"
           type="text"
           placeholder="Search Github Username"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button className={"flex items-center justify-center px-4 border mr-2"} onClick={() => searchUser()}>Search</button>
+        <button
+          className={"flex items-center justify-center px-4 border mr-2"}
+          onClick={() => searchUser()}
+        >
+          Search
+        </button>
       </div>
       <div className="flex justify-center my-8 mx-2 flex-wrap">
-        <button className={globals.Button} onClick={() => back()}>Back</button>
+        <button className={globals.Button} onClick={() => back()}>
+          Back
+        </button>
         <input
           placeholder=""
           value={pageId}
@@ -81,16 +89,20 @@ const List: FunctionComponent = () => {
           }}
           className="s:w-20 lg:w-auto"
         />
-        <button className={globals.Button} onClick={() => next()}>Next</button>
+        <button className={globals.Button} onClick={() => next()}>
+          Next
+        </button>
       </div>
       {errorMessage !== "" ? <p>{errorMessage}</p> : null}
-      {!isFetching ?
+      {!isFetching ? (
         <>
           {users?.map((data: IUsers) => (
-           <Card {...data} key={data.id}/>
+            <Card {...data} key={data.id} />
           ))}
         </>
-        : <p>Loading...</p>}
+      ) : (
+        <p>Loading...</p>
+      )}
     </section>
   );
 };
